@@ -3,6 +3,8 @@ import errorHandlerMiddleware from './middleware/error-handler.js'
 import notFoundMiddleware from './middleware/not-found.js'
 import dotenv from 'dotenv'
 import connectDB from './db/connect.js'
+// to skip using try and catch blocks
+import 'express-async-errors'
 
 const app = express()
 dotenv.config()
