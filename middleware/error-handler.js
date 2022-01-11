@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes'
 const errorHandlerMiddleware = (err, req, res, next) => {
     console.log(err)
     const defaultError = {
-        statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+        statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
         // we are checking whether err.message is already present
         // that is it name or email or password is empty
         // if they are already filled, then check for other errors
