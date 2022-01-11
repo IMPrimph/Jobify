@@ -6,17 +6,24 @@ const errorHandlerMiddleware = (err, req, res, next) => {
         statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
         msg: "Something went wrong, try again later"
     }
+
     if (err.name === 'ValidationError') {
         defaultError.statusCode = StatusCodes.BAD_REQUEST
         // this err.message comes from the error object that mongoose throws
         defaultError.msg = Object.values(err.errors).map((item) => item.message).join(",")
     }
-    // res.status(defaultError.statusCode).json({
-    //     msg: defaultError.msg
-    // })
+
+    if (err.code && err.code === 11000) {
+        defaultError.statusCode = StatusCodes.BAD_REQUEST
+        defaultError.msg = `${Object.keys(err.keyValue)} field has to be unique!`
+    }
+
     res.status(defaultError.statusCode).json({
-        msg: err
+        msg: defaultError.msg
     })
+    // res.status(defaultError.statusCode).json({
+    //     msg: err
+    // })
 }
 
 export default errorHandlerMiddleware
