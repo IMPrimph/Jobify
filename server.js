@@ -1,3 +1,4 @@
+import cors from 'cors'
 import express from 'express'
 import errorHandlerMiddleware from './middleware/error-handler.js'
 import notFoundMiddleware from './middleware/not-found.js'
@@ -12,6 +13,7 @@ dotenv.config()
 import authRouter from './routes/authRoutes.js'
 import jobsRouter from './routes/jobsRoutes.js'
 
+app.use(cors())
 // make data from body available
 app.use(express.json())
 
