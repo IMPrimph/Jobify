@@ -8,6 +8,8 @@ import connectDB from './db/connect.js'
 import 'express-async-errors'
 import morgan from 'morgan'
 
+import authenticateUser from './middleware/auth.js'
+
 const app = express()
 dotenv.config()
 
@@ -28,7 +30,7 @@ app.get("/", (req, res) => {
 })
 
 app.use('/api/v1/auth', authRouter)
-app.use('/api/v1/jobs', jobsRouter)
+app.use('/api/v1/jobs', authenticateUser, jobsRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
