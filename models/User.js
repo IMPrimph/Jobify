@@ -43,6 +43,10 @@ const UserSchema = new mongoose.Schema({
 // this will be triggered for user creation and updation
 // not on findOneAndUpdate
 UserSchema.pre('save', async function () {
+    // in update route this line logs, whatever the fields are changed 
+    // like when a name is being updated
+    // console.log(this.modifiedPaths())
+    if (!this.isModified('password')) return
     const salt = await bcrypt.genSalt(10)
     this.password = await bcrypt.hash(this.password, salt)
 })
