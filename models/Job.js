@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import validator from 'validator'
+import User from './User.js'
 
 const JobSchema = new mongoose.Schema({
     company: {
