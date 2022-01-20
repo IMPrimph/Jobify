@@ -63,7 +63,7 @@ const deleteJob = async (req, res) => {
 
     checkPermissions(req.user, job.createdBy)
 
-    await Job.remove()
+    await job.remove()
 
     res.status(StatusCodes.OK).json({
         msg: 'Success! Job removed'
